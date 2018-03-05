@@ -4,10 +4,19 @@ var fs = require("fs")
 var xml2js = require("xml2js")
 var library = require('../../app/dao/LibraryDAO')
 
-function copyXML () {
+function setUp () {
   var copyObj = {}
   library.readXMLFile(function(obj) {
     copyObj = obj;
+    fs.readFile("./testData.xml", function(err, data) {
+      if (err) {
+        console.log("neeeeej")
+        console.log(err);
+      }
+      xml2js.parseString(data, function (err, result) {
+        library.writeXMLFile(result);
+      });
+    });
     var builder = new xml2js.Builder();
     var xml = builder.buildObject(obj);
     fs.writeFile("./copyXML.xml", xml, function (err) {
@@ -41,7 +50,7 @@ function containsID(id, callback) {
 };
 
 module.exports = {
-  copyXML, 
+  setUp, 
   resetXML, 
   containsID
 };

@@ -6,16 +6,16 @@ var app = require("../app");
 var LibraryDAO = require('../app/dao/LibraryDAO');
 
 describe("RemoveBookResource", function () {
-  support.copyXML();
+  support.setUp();
   describe("DELETE/api/books", function () {
     var counter = 0;
     it("removes the right book", function(done) {
       request(app)
-      .delete('/api/books/5')
+      .delete('/api/books/2')
       .set('Accept', 'application/json')
       .then(function (response) {
         counter++;
-        support.containsID("5", function (result) {
+        support.containsID("2", function (result) {
           chai.expect(result).to.equal(false);
           if (counter === 2) {
             support.resetXML();
@@ -26,7 +26,7 @@ describe("RemoveBookResource", function () {
     }, 
     it("respons with 200 and json", function (done) {
       request(app)
-      .delete('/api/books/6')
+      .delete('/api/books/3')
       .set('Accept', 'application/json')
       .expect(200)
       .expect('Content-Type', /json/)

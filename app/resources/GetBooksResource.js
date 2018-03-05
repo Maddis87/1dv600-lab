@@ -1,5 +1,3 @@
-
-
 (function () {
     "use strict";
 
@@ -20,13 +18,17 @@
         //callback(bookList);
         
         var bookArr = [];
-    LibraryDAO.readXMLFile( obj => {
-        obj.catalog.book.map(element => {
-            var b = book.createBook(element.$.id, element.title.toString(), element.author.toString(),
-             element.genre.toString(), element.publish_date.toString(), element.price.toString(), 
-             element.description.toString());
-            bookArr.push(b);
-            });
+        LibraryDAO.readXMLFile(obj => {
+            var listObj = obj;
+            
+            if(listObj.catalog.book) {
+                listObj.catalog.book.map(element => {
+                    var b = book.createBook(element.$.id, element.title.toString(), element.author.toString(),
+                    element.genre.toString(), element.publish_date.toString(), element.price.toString(), 
+                    element.description.toString());
+                    bookArr.push(b);
+                });
+            }
             callback(JSON.stringify(bookArr));
         });
     };

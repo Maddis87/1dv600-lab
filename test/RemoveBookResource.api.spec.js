@@ -1,38 +1,42 @@
 "use strict"
 var request = require("supertest")
 var chai = require("chai");
-
-var app;
+var support = require("./support/supportFunctions")
+var app = require("../app");
 var LibraryDAO = require('../app/dao/LibraryDAO');
 
-
 describe("RemoveBookResource", function () {
-  
+  support.copyXML();
   describe("DELETE/api/books", function () {
-    var listObj = {};
-    app = require("../app");
-    it("response with 200 and json", function(done) {
-      LibraryDAO.readXMLFile(obj => {
-        listObj = obj;
-        return request(app)
-        .delete('/api/books/5')
-        .set('Accept', 'application/json')
-        .then(function(resp, err) {
-          LibraryDAO.readXMLFile(function (obj) {
-            var isIdInList = false;
-            var arr = obj.catalog.book;
-            arr.forEach(element => {
-              if (element.$.id === "5") {
-                isIdInList = true;
-              }
-            });
-            LibraryDAO.writeXMLFile(listObj);
-            chai.expect(isIdInList).to.equal(false);
-            done();
-          });
+    var counter = 0;
+    it("removes the right book", function(done) {
+      request(app)
+      .delete('/api/books/5')
+      .set('Accept', 'application/json')
+      .then(function (response) {
+        counter++;
+        support.containsID("5", function (result) {
+          chai.expect(result).to.equal(false);
+          if (counter === 2) {
+            support.resetXML();
+          }
+          done();
         });
       });
     }, 
-    it(""));
+    it("respons with 200 and json", function (done) {
+      request(app)
+      .delete('/api/books/6')
+      .set('Accept', 'application/json')
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .end(function() {
+        counter++;
+        if(counter === 2) {
+          support.resetXML();
+        }
+        done();
+      });
+    }));
   });
 });

@@ -11,11 +11,11 @@ describe("RemoveBookResource", function () {
     var counter = 0;
     it("removes the right book", function(done) {
       request(app)
-      .delete('/api/books/2')
+      .delete('/api/books/1')
       .set('Accept', 'application/json')
       .then(function (response) {
         counter++;
-        support.containsID("2", function (result) {
+        support.containsID("1", function (result) {
           chai.expect(result).to.equal(false);
           if (counter === 2) {
             support.resetXML();

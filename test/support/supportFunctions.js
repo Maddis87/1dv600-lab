@@ -8,9 +8,8 @@ function setUp () {
   var copyObj = {}
   library.readXMLFile(function(obj) {
     copyObj = obj;
-    fs.readFile("./testData.xml", function(err, data) {
+    fs.readFile("./test/support/testData.xml", function(err, data) {
       if (err) {
-        console.log("neeeeej")
         console.log(err);
       }
       xml2js.parseString(data, function (err, result) {
@@ -19,7 +18,7 @@ function setUp () {
     });
     var builder = new xml2js.Builder();
     var xml = builder.buildObject(obj);
-    fs.writeFile("./copyXML.xml", xml, function (err) {
+    fs.writeFile("./test/support/copyXML.xml", xml, function (err) {
       if (err) {
           console.log(err);
       }
@@ -27,7 +26,7 @@ function setUp () {
   });
 };
 function resetXML() {
-  fs.readFile("./copyXML.xml", function(err, data) {
+  fs.readFile("./test/support/copyXML.xml", function(err, data) {
     if (err) {
       console.log(err);
     }

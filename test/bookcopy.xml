@@ -70,7 +70,7 @@
       <genre>Personal Development</genre>
       <price>124</price>
       <publish_date>1937-11-12</publish_date>
-      <description> </description>
+      <description></description>
    </book>
    <book id="10">
       <author>Stephen Hawking</author>

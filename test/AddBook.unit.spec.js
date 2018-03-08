@@ -1,5 +1,5 @@
 var expect = require("chai").expect;
-var AddBook = require("../app/resources/AddBookResource");
+var AddBook = require("../app/dao/addBook");
 
 describe("AddBook test", function() {
   describe("Validation of support functions for AddBookResource", function() {

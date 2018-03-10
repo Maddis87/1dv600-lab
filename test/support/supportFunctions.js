@@ -47,9 +47,23 @@ function containsID(id, callback) {
     callback(isIdInList);
   });
 };
+function containsBook(title, author, callback) {
+  library.readXMLFile(function(obj) {
+    var isBookInList = false;
+    var arr = obj.catalog.book;
+
+    arr.forEach(element => {
+      if (element.title[0] === title && element.author[0] === author) {
+        isBookInList = true;
+      }
+    });
+    callback(isBookInList);
+  });
+};
 
 module.exports = {
   setUp, 
   resetXML, 
-  containsID
+  containsID,
+  containsBook
 };

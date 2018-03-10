@@ -9,7 +9,6 @@
     const path = require('path')
     const xmlPath = path.resolve('.', 'books.xml')
 
-
     // Use this file to write and read the xml file.
     var LibraryDAO = {
 
@@ -18,6 +17,9 @@
         
            fs.readFile(xmlPath, function(err, data) {
                 xml2js.parseString(data, function(err, result) {
+                    if (!result.catalog) {
+                        result = {catalog: {}};
+                    }
                     callback(result);
                 });
             });

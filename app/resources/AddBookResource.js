@@ -5,8 +5,7 @@
     var addBook = require("../dao/addBook")
     
     module.exports = function (data, callback) {
-        console.log(data);
-        if (!addBook.checkTitle(data.title) && !addBook.checkAuthor(data.author)) {
+        if (!addBook.isInputValid(data)) {
             throw new TypeError("The input is not valid")
         } 
         LibraryDAO.readXMLFile(function (obj) {
@@ -23,16 +22,17 @@
                     copy.sort(function(a, b) {
                         return a.$.id - b.$.id;
                     });
-                    var newId;
-                    for (var i = 0; i < copy.length - 1; i++) {
+                    var newId = parseInt(copy[copy.length - 1].$.id) + 1;
+                    var i;
+                    for (i = 0; i < copy.length; i++) {
                     
                         if (copy[i].$.id !==(i + 1).toString()) {
-                            newId = (i + 1).toString();
+                            newId = i + 1;
                             break;
                         }
                     }
                     var newBook = {
-                        $: {id: newId}, 
+                        $: {id: newId.toString()}, 
                         author: [data.author],
                         title: [data.title],
                         genre: [data.genre], 
@@ -41,7 +41,6 @@
                         description: [data.description]
                     };
                    obj.catalog.book.push(newBook);
-                   console.log(obj.catalog.book);
                    LibraryDAO.writeXMLFile(obj);
                 }
             }

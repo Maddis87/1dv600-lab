@@ -1,8 +1,8 @@
 var expect = require("chai").expect;
 var AddBook = require("../app/dao/addBook");
 
-describe("AddBook test", function() {
-  describe("Validation of support functions for AddBookResource", function() {
+describe("addBook test", function() {
+  describe("Validation of support functions", function() {
     it("check if checkTitle() returns true for valid input", function() {
       var result = AddBook.checkTitle("Harry Potter");
       expect(result).to.equal(true);
@@ -50,6 +50,48 @@ describe("AddBook test", function() {
     it("check if checkDescription() returns false for invalid input", function() {
       var result = AddBook.checkDescription("");
       expect(result).to.equal(false);
+    });
+  }), 
+  describe("Test output for getXMLBookObj()", function(done) {
+    it("with only data as input", function() {
+      var data = {
+        id: "1", 
+        title: "Olympic games 2018",
+        author: "Johnny B", 
+        genre: "reality", 
+        price: "300",
+        publish_date: "2018-02-28",
+        description: "A book about the results of the winter olympig cames 2018"
+      };
+
+      var obj = AddBook.getXmlBookObj(data);
+      expect(data.id).to.equal(obj.$.id);
+      expect(data.author).to.equal(obj.author[0]);
+      expect(data.title).to.equal(obj.title[0]);
+      expect(data.genre).to.equal(obj.genre[0]);
+      expect(data.price).to.equal(obj.price[0]);
+      expect(data.publish_date).to.equal(obj.publish_date[0]);
+      expect(data.description).to.equal(obj.description[0]);
+    }),
+    it("with data and id as input", function() {
+      var data = {
+        id: "1", 
+        title: "Olympic games 2018",
+        author: "Johnny B", 
+        genre: "reality", 
+        price: "300",
+        publish_date: "2018-02-28",
+        description: "A book about the results of the winter olympig cames 2018"
+      };
+
+      var obj = AddBook.getXmlBookObj(data, "2");
+      expect("2").to.equal(obj.$.id);
+      expect(data.author).to.equal(obj.author[0]);
+      expect(data.title).to.equal(obj.title[0]);
+      expect(data.genre).to.equal(obj.genre[0]);
+      expect(data.price).to.equal(obj.price[0]);
+      expect(data.publish_date).to.equal(obj.publish_date[0]);
+      expect(data.description).to.equal(obj.description[0]);
     });
   });
 });

@@ -16,7 +16,9 @@
         // console.log(bookList); subtask A
         // console.log(booksJson); subtask B
         //callback(bookList);
-        
+        if(title) {
+            console.log(title);
+        }
         var bookArr = [];
         LibraryDAO.readXMLFile(obj => {
             var listObj = obj;

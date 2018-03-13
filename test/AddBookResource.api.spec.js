@@ -26,9 +26,11 @@ describe("AddBookResource", function() {
       .then(function(err, res) {
         support.containsBook('Big Java', 'Cay Horstman', function(result) {
           chai.expect(result).to.equal(true);
+          support.resetXML();
           done();
         });
       });
     });
   });
 });
+

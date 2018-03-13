@@ -7,7 +7,6 @@
 
     module.exports = function (id, data, callback) {
         if (!check.isInputValid(data)) {
-            console.log("hello");
             return callback();
         }
         LibraryDAO.readXMLFile(function (obj) {

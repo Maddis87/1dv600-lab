@@ -1,10 +1,10 @@
 "use strict"
 var request = require("supertest")
 var chai = require("chai");
-var support = require("../support/supportFunctions");
 var app = require("../../app");
 var LibraryDAO = require('../../app/dao/LibraryDAO');
 
+//Testmodule for GetBookResource.
 module.exports.runTest = function (callback) {
 
   describe("GetBooksResource", function () {
@@ -23,7 +23,6 @@ module.exports.runTest = function (callback) {
             callback();
           });
         });
-        
       });
     });
   });

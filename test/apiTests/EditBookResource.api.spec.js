@@ -1,10 +1,10 @@
 "use strict"
 var request = require("supertest")
 var chai = require("chai");
-var support = require("../support/supportFunctions");
 var app = require("../../app");
 var LibraryDAO = require('../../app/dao/LibraryDAO');
 
+//Test module for EditBookResource
 module.exports.runTest = function (callback) {
 
   describe("EditBookResource", function() {
@@ -26,6 +26,7 @@ module.exports.runTest = function (callback) {
         .expect("Content-Type", /json/)
         .expect(200)
         .then(function(err, res) {
+          //Read the file to check that it updates the book in the xml.
           LibraryDAO.readXMLFile(function(obj) {
             var updated = false;
             obj.catalog.book.forEach(element => {

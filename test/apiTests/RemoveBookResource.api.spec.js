@@ -4,6 +4,8 @@ var chai = require("chai");
 var support = require("../support/supportFunctions");
 var app = require("../../app");
 var LibraryDAO = require('../../app/dao/LibraryDAO');
+
+//TestModule for RemoveBookResource.
 module.exports.runTest = function(callback) {
 
   describe("RemoveBookResource", function () {
@@ -20,7 +22,6 @@ module.exports.runTest = function(callback) {
             chai.expect(result).to.equal(false);
             done();
             if (counter === 2) {
-              
               callback();
             }
           });
@@ -36,7 +37,6 @@ module.exports.runTest = function(callback) {
           counter++;
           done();
           if(counter === 2) {
-            
             callback();
           }
         });

@@ -1,6 +1,7 @@
 var expect = require("chai").expect
 var book = require("../app/dao/book");
 
+//Test module for book.js
 describe("book test", function() {
 
   describe("validation of book.createBook(input)", function() {
@@ -18,11 +19,9 @@ describe("book test", function() {
      expect(bookObj.price).to.equal("100");
      expect(bookObj.description).to.equal("A book about the development process of software engineering");
       
-    });
-
+    }),
     it("book.create return false with invalid input", function() {
       var bookObj = book.createBook("2", 2, "Ian Sommerville");
-
       expect(bookObj).to.equal(false);
     });
   });

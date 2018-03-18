@@ -5,6 +5,7 @@
     var book = require('../dao/book')
 
     module.exports = function (id, callback) {
+        //reads the xml file and checks if the given id exists, if it does, return that bookObject as json.
         LibraryDAO.readXMLFile(function (obj) {
             var bookObj = {};
             if(obj.catalog.book) {

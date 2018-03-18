@@ -1,54 +1,54 @@
 var expect = require("chai").expect;
-var AddBook = require("../app/dao/addBook");
+var bookSupport = require("../app/dao/bookSupport");
 
-describe("addBook test", function() {
+describe("bookSupport test", function() {
   describe("Validation of support functions", function() {
     it("check if checkTitle() returns true for valid input", function() {
-      var result = AddBook.checkTitle("Harry Potter");
+      var result = bookSupport.checkTitle("Harry Potter");
       expect(result).to.equal(true);
     }), 
     it("check if checkTitle() returns false for invalid input", function() {
-      var result = AddBook.checkTitle("");
+      var result = bookSupport.checkTitle("");
       expect(result).to.equal(false);
     }),
     it("check if checkAuthor() returns true for valid input", function() {
-      var result = AddBook.checkAuthor("Paolo Cohelo");
+      var result = bookSupport.checkAuthor("Paolo Cohelo");
       expect(result).to.equal(true);
     }), 
     it("check if checkAuthor() returns false for invalid input", function() {
-      var result = AddBook.checkAuthor("This is just a string that is way to long");
+      var result = bookSupport.checkAuthor("This is just a string that is way to long");
       expect(result).to.equal(false);
     }),
     it("check if checkGenre() returns true for valid input", function() {
-      var result = AddBook.checkGenre("Fantasy");
+      var result = bookSupport.checkGenre("Fantasy");
       expect(result).to.equal(true);
     }), 
     it("check if checkGenre() returns false for invalid input", function() {
-      var result = AddBook.checkGenre("This is just a string that is way to long2");
+      var result = bookSupport.checkGenre("This is just a string that is way to long2");
       expect(result).to.equal(false);
     }),
     it("check if checkPrice() returns true for valid input", function() {
-      var result = AddBook.checkPrice("200");
+      var result = bookSupport.checkPrice("200");
       expect(result).to.equal(true);
     }), 
     it("check if checkprice() returns false for invalid input", function() {
-      var result = AddBook.checkPrice("10000000");
+      var result = bookSupport.checkPrice("10000000");
       expect(result).to.equal(false);
     }),
     it("check if checkPublishDate() returns true for valid input", function() {
-      var result = AddBook.checkPublishDate("180201");
+      var result = bookSupport.checkPublishDate("180201");
       expect(result).to.equal(true);
     }), 
     it("check if checkPublishDate() returns false for invalid input", function() {
-      var result = AddBook.checkPublishDate("");
+      var result = bookSupport.checkPublishDate("");
       expect(result).to.equal(false);
     }),
     it("check if checkDescription() returns true for valid input", function() {
-      var result = AddBook.checkDescription("This is a testPhrase for a unit test!");
+      var result = bookSupport.checkDescription("This is a testPhrase for a unit test!");
       expect(result).to.equal(true);
     }), 
     it("check if checkDescription() returns false for invalid input", function() {
-      var result = AddBook.checkDescription("");
+      var result = bookSupport.checkDescription("");
       expect(result).to.equal(false);
     });
   }), 
@@ -64,7 +64,7 @@ describe("addBook test", function() {
         description: "A book about the results of the winter olympig cames 2018"
       };
 
-      var obj = AddBook.getXmlBookObj(data);
+      var obj = bookSupport.getXmlBookObj(data);
       expect(data.id).to.equal(obj.$.id);
       expect(data.author).to.equal(obj.author[0]);
       expect(data.title).to.equal(obj.title[0]);
@@ -84,7 +84,7 @@ describe("addBook test", function() {
         description: "A book about the results of the winter olympig cames 2018"
       };
 
-      var obj = AddBook.getXmlBookObj(data, "2");
+      var obj = bookSupport.getXmlBookObj(data, "2");
       expect("2").to.equal(obj.$.id);
       expect(data.author).to.equal(obj.author[0]);
       expect(data.title).to.equal(obj.title[0]);

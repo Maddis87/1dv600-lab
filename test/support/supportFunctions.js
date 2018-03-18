@@ -4,6 +4,9 @@ var fs = require("fs")
 var xml2js = require("xml2js")
 var LibraryDAO = require('../../app/dao/LibraryDAO')
 
+//support functions for the test modules.
+
+//Make a copy of the original xml and writes the testdata to that file.
 function setUp () {
   LibraryDAO.readXMLFile(function(obj) {
     
@@ -24,6 +27,8 @@ function setUp () {
     });
   });
 };
+
+//resets the original xml after the tests are done.
 function resetXML() {
   fs.readFile("./test/support/copyXML.xml", function(err, data) {
     if (err) {
@@ -34,6 +39,8 @@ function resetXML() {
     });
   });
 };
+
+//Checks if a given id exists in the xml file.
 function containsID(id, callback) {
   LibraryDAO.readXMLFile(function (obj) {
     var isIdInList = false;
@@ -46,6 +53,7 @@ function containsID(id, callback) {
     callback(isIdInList);
   });
 };
+//checks if a given book exists in the xml file.
 function containsBook(title, author, callback) {
   LibraryDAO.readXMLFile(function(obj) {
     console.log(obj);

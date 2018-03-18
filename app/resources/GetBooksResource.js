@@ -17,6 +17,7 @@
         // console.log(booksJson); subtask B
         //callback(bookList);
         
+        //Reads the xml file, turn the books to a bookObject and return the list as json.
         LibraryDAO.readXMLFile(function (obj) {
             var bookArr = [];
             for(var i = 0; i < obj.catalog.book.length; i++) {

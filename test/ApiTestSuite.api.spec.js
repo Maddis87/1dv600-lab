@@ -9,7 +9,7 @@ var getBookResource = require("./apiTests/GetBookResource.api.spec");
 var getBooksResource = require("./apiTests/GetBooksResource.api.spec");
 
 
-
+//The module that calls for all the api tests.
   removeBookResource.runTest(function(){
     editBookResource.runTest(function() {
       getBooksResource.runTest(function() {

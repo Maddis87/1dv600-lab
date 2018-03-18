@@ -2,12 +2,13 @@
     "use strict";
 
     var LibraryDAO = require('../dao/LibraryDAO');
-    var addBook = require("../dao/addBook")
+    var bookSupport = require("../dao/bookSupport");
     
     module.exports = function (data, callback) {
-        if (!addBook.isInputValid(data)) {
+        if (!bookSupport.isInputValid(data)) {
             throw new TypeError("The input is not valid")
         } 
+        //reads the xml file, check if the given book exists, if not, add to the xml file.
         LibraryDAO.readXMLFile(function (obj) {
             var exists = false;
             for(var i = 0; i < obj.catalog.book.length && !exists; i++) {
@@ -17,9 +18,8 @@
                 }
             }
             if(!exists) {
-
-                 var newId = addBook.getNewId(obj.catalog.book);
-                var newBook = addBook.getXmlBookObj(data, newId)
+                 var newId = bookSupport.getNewId(obj.catalog.book);
+                var newBook = bookSupport.getXmlBookObj(data, newId)
                 obj.catalog.book.push(newBook);
                 LibraryDAO.writeXMLFile(obj);
             }

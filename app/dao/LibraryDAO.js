@@ -17,8 +17,9 @@
         
            fs.readFile(xmlPath, function(err, data) {
                 xml2js.parseString(data, function(err, result) {
+
                     if (!result.catalog) {
-                        result = {catalog: {}};
+                        result = {catalog: {book: []}};
                     }
                     callback(result);
                 });

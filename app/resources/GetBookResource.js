@@ -4,7 +4,6 @@
     var LibraryDAO = require('../dao/LibraryDAO');
     var book = require('../dao/book')
 
-
     module.exports = function (id, callback) {
         LibraryDAO.readXMLFile(function (obj) {
             var bookObj = {};

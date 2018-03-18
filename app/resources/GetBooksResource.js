@@ -16,20 +16,15 @@
         // console.log(bookList); subtask A
         // console.log(booksJson); subtask B
         //callback(bookList);
-        if(title) {
-            console.log(title);
-        }
-        var bookArr = [];
-        LibraryDAO.readXMLFile(obj => {
-            var listObj = obj;
-            
-            if(listObj.catalog.book) {
-                listObj.catalog.book.map(element => {
-                    var b = book.createBook(element.$.id, element.title.toString(), element.author.toString(),
+        
+        LibraryDAO.readXMLFile(function (obj) {
+            var bookArr = [];
+            for(var i = 0; i < obj.catalog.book.length; i++) {
+               var element = obj.catalog.book[i];
+                var b = book.createBook(element.$.id, element.title.toString(), element.author.toString(),
                     element.genre.toString(), element.publish_date.toString(), element.price.toString(), 
                     element.description.toString());
-                    bookArr.push(b);
-                });
+                bookArr.push(b);
             }
             callback(JSON.stringify(bookArr));
         });

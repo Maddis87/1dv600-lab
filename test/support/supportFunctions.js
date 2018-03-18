@@ -2,18 +2,17 @@
 
 var fs = require("fs")
 var xml2js = require("xml2js")
-var library = require('../../app/dao/LibraryDAO')
+var LibraryDAO = require('../../app/dao/LibraryDAO')
 
 function setUp () {
-  var copyObj = {}
-  library.readXMLFile(function(obj) {
-    copyObj = obj;
+  LibraryDAO.readXMLFile(function(obj) {
+    
     fs.readFile("./test/support/testData.xml", function(err, data) {
       if (err) {
         console.log(err);
       }
       xml2js.parseString(data, function (err, result) {
-        library.writeXMLFile(result);
+        LibraryDAO.writeXMLFile(result);
       });
     });
     var builder = new xml2js.Builder();
@@ -31,12 +30,12 @@ function resetXML() {
       console.log(err);
     }
     xml2js.parseString(data, function (err, result) {
-      library.writeXMLFile(result);
+      LibraryDAO.writeXMLFile(result);
     });
   });
 };
 function containsID(id, callback) {
-  library.readXMLFile(function (obj) {
+  LibraryDAO.readXMLFile(function (obj) {
     var isIdInList = false;
     var arr = obj.catalog.book;
     arr.forEach(element => {
@@ -48,7 +47,8 @@ function containsID(id, callback) {
   });
 };
 function containsBook(title, author, callback) {
-  library.readXMLFile(function(obj) {
+  LibraryDAO.readXMLFile(function(obj) {
+    console.log(obj);
     var isBookInList = false;
     var arr = obj.catalog.book;
 

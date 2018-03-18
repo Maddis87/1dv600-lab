@@ -6,7 +6,7 @@ describe("book test", function() {
   describe("validation of book.createBook(input)", function() {
 
     it("book.createBook() return a book object with valid input", function () {
-      //id, title, author, genre, publishDate, price,description
+
       var bookObj = book.createBook("1", "Software Engineering", "Ian Sommerville",
      "non-fiction", "2016-01-01", "100", "A book about the development process of software engineering");
 

@@ -44,20 +44,20 @@ var checkDescription = function (description) {
 };
 var getXmlBookObj = function (data, id) {
   var XMLBookObj = {$: {id: ""}, 
-  author: [data.author],
-  title: [data.title],
-  genre: [data.genre], 
-  price: [data.price],
-  publish_date: [data.publish_date],
-  description: [data.description]
-}
+    author: [data.author],
+    title: [data.title],
+    genre: [data.genre], 
+    price: [data.price],
+    publish_date: [data.publish_date],
+    description: [data.description]
+  }
   if(id) {
     XMLBookObj.$.id = id;
   } else {
     XMLBookObj.$.id = data.id;
   }
   return XMLBookObj;
-} 
+};
 
 var isInputValid = function (data) {
   var title = checkTitle(data.title);
@@ -68,6 +68,25 @@ var isInputValid = function (data) {
   var publishDate = checkPublishDate(data.publish_date);
   return (title && author && price && description && genre && publishDate);
 };
+var getNewId = function(arr) {
+  if (arr.length > 0) {
+    var copy = arr.slice(0);
+    copy.sort(function(a, b) {
+        return a.$.id - b.$.id;
+    });
+    var newId = parseInt(copy[copy.length - 1].$.id) + 1;
+    var i;
+    for (i = 0; i < copy.length; i++) {
+        if (copy[i].$.id !==(i + 1).toString()) {
+            newId = i + 1;
+            break;
+        }
+    }
+  } else {
+    newId = 1;
+  }
+  return newId;
+}
 module.exports = {
   checkTitle,
   checkAuthor, 
@@ -76,5 +95,6 @@ module.exports = {
   checkPrice, 
   checkPublishDate, 
   isInputValid,
-  getXmlBookObj
+  getXmlBookObj,
+  getNewId
 };
